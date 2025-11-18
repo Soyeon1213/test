@@ -4,7 +4,7 @@ WITH base AS (
         id % 50              AS grp,
         id * 3 + 7           AS v1,
         id * id              AS v2
-    FROM range(0, 80000000) 
+    FROM range(0, 180000000) 
 ),
 level1 AS (
     SELECT
