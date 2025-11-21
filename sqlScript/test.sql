@@ -4,14 +4,14 @@ WITH base AS (
         id % 1000              AS grp,
         id * 3 + 7             AS v1,
         id * id                AS v2
-    FROM range(0, 200000000)   -- 여기 숫자로 1차 조절 (200M → 300M → 500M 등)
+    FROM range(0, 10000)   -- 여기 숫자로 1차 조절 (200M → 300M → 500M 등)
 ),
 
 -- subset만 잡아서 join (전체를 cross join하면 진짜 터질 수 있어서 제한)
 subset AS (
     SELECT *
     FROM base
-    WHERE id < 5000000         -- 500만 행만 join 대상으로 사용 (느리면 줄여)
+    WHERE id < 5000         -- 500만 행만 join 대상으로 사용 (느리면 줄여)
 ),
 
 joined AS (
