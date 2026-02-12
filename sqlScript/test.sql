@@ -1,19 +1,8 @@
-WITH base AS (
-    SELECT
-        id,
-        id % 10            AS grp,
-        id * id            AS squared
-    FROM range(0, 30000000)
-),
-agg AS (
-    SELECT
-        grp,
-        COUNT(*)           AS cnt,
-        AVG(squared)       AS avg_sq,
-        MAX(squared)       AS max_sq
-    FROM base
-    GROUP BY grp
-)
-SELECT *
-FROM agg
+SELECT 
+    (id % 10) AS grp, 
+    COUNT(*), 
+    AVG(id * 1.5), 
+    STDDEV(id) -- Standard deviation is CPU intensive
+FROM generate_series(1, 50000000) AS id
+GROUP BY (id % 10)
 ORDER BY grp;
